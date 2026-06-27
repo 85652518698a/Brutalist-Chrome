@@ -62,8 +62,11 @@
   ],
   "host_permissions": [
     "https://api.open-meteo.com/*",
-    "https://ipapi.co/*",
-    "https://api.quotable.io/*"
+    "https://wttr.in/*",
+    "https://www.google.com/s2/favicons*",
+    "https://t0.gstatic.com/*",
+    "https://t1.gstatic.com/*",
+    "https://t2.gstatic.com/*"
   ],
   "commands": {
     "_execute_action": {

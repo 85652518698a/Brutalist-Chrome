@@ -1,27 +1,27 @@
 /**
  * BRUTALIST CHROME — Weather Module
- * Uses IP-based location — no geolocation permission needed.
+ * Uses wttr.in — no API key, no permission issues.
  */
 
 const WMO_CODES = {
-  0:  { desc: 'CLEAR SKY',       icon: '◉' },
-  1:  { desc: 'MAINLY CLEAR',    icon: '◉' },
-  2:  { desc: 'PARTLY CLOUDY',   icon: '◎' },
-  3:  { desc: 'OVERCAST',        icon: '◌' },
-  45: { desc: 'FOGGY',           icon: '≋' },
-  48: { desc: 'RIME FOG',        icon: '≋' },
-  51: { desc: 'LIGHT DRIZZLE',   icon: '∷' },
-  61: { desc: 'RAIN',            icon: '∷' },
-  63: { desc: 'MODERATE RAIN',   icon: '∷∷' },
-  71: { desc: 'SNOW',            icon: '❄' },
-  80: { desc: 'RAIN SHOWERS',    icon: '∷' },
-  95: { desc: 'THUNDERSTORM',    icon: '⚡' },
-  99: { desc: 'HAIL STORM',      icon: '⚡∷' },
+  0:  { desc: 'CLEAR SKY',      icon: '◉' },
+  1:  { desc: 'MAINLY CLEAR',   icon: '◉' },
+  2:  { desc: 'PARTLY CLOUDY',  icon: '◎' },
+  3:  { desc: 'OVERCAST',       icon: '◌' },
+  45: { desc: 'FOGGY',          icon: '≋' },
+  48: { desc: 'RIME FOG',       icon: '≋' },
+  51: { desc: 'LIGHT DRIZZLE',  icon: '∷' },
+  61: { desc: 'RAIN',           icon: '∷' },
+  63: { desc: 'MODERATE RAIN',  icon: '∷∷' },
+  71: { desc: 'SNOW',           icon: '❄' },
+  80: { desc: 'RAIN SHOWERS',   icon: '∷' },
+  95: { desc: 'THUNDERSTORM',   icon: '⚡' },
+  99: { desc: 'HAIL STORM',     icon: '⚡∷' },
 };
 
 export const Weather = {
   async init() {
-    const cache    = await this._loadCache();
+    const cache = await this._loadCache();
     if (cache) this._render(cache);
 
     const cacheAge = Date.now() - (cache?.timestamp || 0);
@@ -32,26 +32,20 @@ export const Weather = {
 
   async _fetchAndRender() {
     try {
-      // IP-based location — no browser permission needed
-      const ipRes  = await fetch('https://ipapi.co/json/');
-      const ipData = await ipRes.json();
-      const lat    = ipData.latitude;
-      const lon    = ipData.longitude;
-      const city   = (ipData.city || 'UNKNOWN').toUpperCase();
-
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
-        `&current=temperature_2m,weathercode,relativehumidity_2m` +
-        `&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=1`;
-
-      const res  = await fetch(url);
+      // wttr.in — free, no key, auto-detects location by IP
+      const res  = await fetch('https://wttr.in/?format=j1');
       const data = await res.json();
 
+      const current = data.current_condition[0];
+      const area    = data.nearest_area[0];
+      const city    = area.areaName[0].value.toUpperCase();
+
       const weatherData = {
-        temp:      Math.round(data.current.temperature_2m),
-        code:      data.current.weathercode,
-        humidity:  data.current.relativehumidity_2m,
-        high:      Math.round(data.daily.temperature_2m_max[0]),
-        low:       Math.round(data.daily.temperature_2m_min[0]),
+        temp:      parseInt(current.temp_C),
+        code:      this._mapCondition(parseInt(current.weatherCode)),
+        humidity:  parseInt(current.humidity),
+        high:      parseInt(data.weather[0].maxtempC),
+        low:       parseInt(data.weather[0].mintempC),
         city,
         timestamp: Date.now(),
       };
@@ -60,9 +54,23 @@ export const Weather = {
       chrome.storage?.local.set({ weatherCache: weatherData });
 
     } catch (err) {
-      document.getElementById('weatherDesc').textContent = 'OFFLINE';
+      const el = document.getElementById('weatherDesc');
+      if (el) el.textContent = 'OFFLINE';
       console.warn('[Weather] fetch failed:', err);
     }
+  },
+
+  // Map wttr.in weather codes to WMO-like codes
+  _mapCondition(code) {
+    if (code === 113) return 0;
+    if (code === 116) return 2;
+    if (code === 119 || code === 122) return 3;
+    if (code === 143 || code === 248 || code === 260) return 45;
+    if ([263,266,293,296].includes(code)) return 51;
+    if ([299,302,305,308].includes(code)) return 63;
+    if ([323,326,329,332,335,338,368,371].includes(code)) return 71;
+    if ([200,386,389,392,395].includes(code)) return 95;
+    return 2;
   },
 
   _render(data) {
