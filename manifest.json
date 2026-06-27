@@ -38,10 +38,9 @@
 
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["https://*/*", "http://*/*"],
       "js": ["extension/content.js"],
-      "run_at": "document_end",
-      "exclude_matches": ["chrome://*/*", "chrome-extension://*/*"]
+      "run_at": "document_end"
     }
   ],
 
@@ -88,9 +87,6 @@
       "description": "Toggle Brutalist sidebar"
     },
     "new-tab": {
-      "suggested_key": {
-        "default": "Ctrl+T"
-      },
       "description": "Open new Brutalist tab"
     }
   },
