@@ -642,3 +642,8 @@ kbd, .kbd {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── FIX: Command overlay hidden state ── */
+.command-overlay[hidden] {
+  display: none !important;
+}
