@@ -1,0 +1,85 @@
+/* ============================================================
+   BRUTALIST CHROME — RESPONSIVE STYLES
+   ============================================================ */
+
+/* ── 1400px+ (Large screens) ── */
+@media (min-width: 1400px) {
+  .layout {
+    grid-template-columns: 300px 1fr 320px;
+    padding: var(--space-8);
+    gap: var(--space-6);
+  }
+  .brand-word { font-size: 5rem; }
+  .shortcuts-grid { grid-template-columns: repeat(8, 1fr); }
+}
+
+/* ── 1200px – 1399px ── */
+@media (max-width: 1399px) {
+  .layout {
+    grid-template-columns: 240px 1fr 260px;
+  }
+}
+
+/* ── 1024px – 1199px ── */
+@media (max-width: 1199px) {
+  .layout {
+    grid-template-columns: 220px 1fr 240px;
+    gap: var(--space-3);
+    padding: var(--space-4);
+  }
+  .clock-time { font-size: 1.8rem; }
+  .weather-temp { font-size: 2rem; }
+  .shortcuts-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* ── 900px – 1023px (Tablet landscape) ── */
+@media (max-width: 1023px) {
+  .layout {
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto auto;
+  }
+  .col-right {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: visible;
+  }
+  .col-right .widget { flex: 1 1 280px; }
+  .kbd-hints { display: none; }
+}
+
+/* ── 768px – 899px (Tablet portrait) ── */
+@media (max-width: 899px) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    overflow-y: auto;
+  }
+  .col-left {
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: visible;
+  }
+  .col-left .widget { flex: 1 1 220px; }
+  .brand-word { font-size: 2.5rem; }
+  .shortcuts-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ── Below 768px ── */
+@media (max-width: 767px) {
+  .ticker-wrap { display: none; }
+  .layout {
+    margin-top: 0;
+    padding: var(--space-3);
+    height: calc(100vh - 60px);
+  }
+  .bottom-bar { height: 60px; }
+  .calendar-strip { display: none; }
+  .bookmarks-bar { height: 60px; }
+  .col-left { display: none; }
+  .col-right { display: none; }
+  .col-center { width: 100%; }
+  .brand-word { font-size: 2rem; }
+  .search-container { max-width: 100%; }
+  .shortcuts-grid { grid-template-columns: repeat(4, 1fr); max-width: 100%; }
+}

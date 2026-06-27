@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRUTALIST — Function Over Form</title>
+  <link rel="stylesheet" href="../theme/variables.css" />
+  <link rel="stylesheet" href="../theme/animations.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css" />
+</head>
+<body class="scan-lines">
+
+  <!-- ══ BACKGROUND ══ -->
+  <div id="bg-layer" class="bg-layer">
+    <div class="bg-image" id="bgImage"></div>
+    <div class="bg-overlay"></div>
+    <div class="bg-noise"></div>
+  </div>
+
+  <!-- ══ TICKER TAPE ══ -->
+  <div class="ticker-wrap" id="ticker">
+    <div class="ticker-track" id="tickerTrack">
+      <span>WORK</span><span class="sep">//</span>
+      <span>FOCUS</span><span class="sep">//</span>
+      <span>DISCIPLINE</span><span class="sep">//</span>
+      <span>REPEAT</span><span class="sep">//</span>
+      <span>NO SIMPLICITY</span><span class="sep">•</span>
+      <span>NO EXCUSES</span><span class="sep">•</span>
+      <span>JUST FUNCTION</span><span class="sep">•</span>
+      <!-- duplicate for seamless loop -->
+      <span>WORK</span><span class="sep">//</span>
+      <span>FOCUS</span><span class="sep">//</span>
+      <span>DISCIPLINE</span><span class="sep">//</span>
+      <span>REPEAT</span><span class="sep">//</span>
+      <span>NO SIMPLICITY</span><span class="sep">•</span>
+      <span>NO EXCUSES</span><span class="sep">•</span>
+      <span>JUST FUNCTION</span><span class="sep">•</span>
+    </div>
+  </div>
+
+  <!-- ══ MAIN LAYOUT ══ -->
+  <main class="layout">
+
+    <!-- ── LEFT COLUMN ── -->
+    <aside class="col-left animate-slide-left">
+
+      <!-- Clock -->
+      <section class="widget widget-clock" id="clockWidget">
+        <div class="clock-time" id="clockTime">00:00:00</div>
+        <div class="clock-date" id="clockDate">MON 01 JAN 2025</div>
+        <div class="clock-tz t-caption" id="clockTZ">UTC+00:00</div>
+      </section>
+
+      <!-- Weather -->
+      <section class="widget widget-weather" id="weatherWidget">
+        <div class="widget-header">
+          <span class="t-label">// WEATHER</span>
+          <span class="weather-location t-caption" id="weatherLoc">LOADING...</span>
+        </div>
+        <div class="weather-main">
+          <span class="weather-temp" id="weatherTemp">--°</span>
+          <span class="weather-icon" id="weatherIcon">◈</span>
+        </div>
+        <div class="weather-desc t-caption" id="weatherDesc">FETCHING DATA</div>
+        <div class="weather-meta">
+          <span class="t-caption">H: <span id="weatherHigh">--</span>°</span>
+          <span class="t-caption">L: <span id="weatherLow">--</span>°</span>
+          <span class="t-caption">HUM: <span id="weatherHum">--</span>%</span>
+        </div>
+      </section>
+
+      <!-- Quote -->
+      <section class="widget widget-quote" id="quoteWidget">
+        <div class="widget-header">
+          <span class="t-label">// SIGNAL</span>
+        </div>
+        <blockquote class="quote-text" id="quoteText">
+          "Simplicity is the ultimate sophistication."
+        </blockquote>
+        <cite class="quote-author t-caption" id="quoteAuthor">— LEONARDO DA VINCI</cite>
+        <button class="btn-ghost btn-sm" id="newQuoteBtn">NEW SIGNAL →</button>
+      </section>
+
+    </aside>
+
+    <!-- ── CENTER COLUMN ── -->
+    <section class="col-center">
+
+      <!-- Brand -->
+      <div class="brand animate-enter">
+        <div class="brand-word" data-text="BRUTALIST">BRUTALIST</div>
+        <div class="brand-sub t-caption">FUNCTION OVER FORM.</div>
+      </div>
+
+      <!-- Search -->
+      <div class="search-container animate-enter delay-2" id="searchContainer">
+        <div class="search-box" id="searchBox">
+          <span class="search-icon">⌕</span>
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search Google or type a URL"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="search-voice" id="voiceBtn" title="Voice search">◎</button>
+        </div>
+        <div class="search-suggestions" id="searchSuggestions"></div>
+        <div class="search-engines" id="searchEngines">
+          <button class="engine-btn active" data-engine="google">G</button>
+          <button class="engine-btn" data-engine="bing">B</button>
+          <button class="engine-btn" data-engine="duckduckgo">D</button>
+          <button class="engine-btn" data-engine="brave">BR</button>
+        </div>
+      </div>
+
+      <!-- Quick Shortcuts -->
+      <div class="shortcuts-grid animate-enter delay-3" id="shortcutsGrid">
+        <!-- Populated by bookmarks.js -->
+      </div>
+
+    </section>
+
+    <!-- ── RIGHT COLUMN ── -->
+    <aside class="col-right animate-slide-right">
+
+      <!-- Productivity Dashboard -->
+      <section class="widget widget-productivity" id="productivityWidget">
+        <div class="widget-header">
+          <span class="t-label">// PRODUCTIVITY</span>
+          <div class="prod-score">
+            <span class="prod-score-val" id="prodScore">0</span>
+            <span class="t-caption">PTS</span>
+          </div>
+        </div>
+
+        <!-- Pomodoro Timer -->
+        <div class="pomodoro" id="pomodoroWidget">
+          <div class="pomo-label t-caption">FOCUS TIMER</div>
+          <div class="pomo-display" id="pomoDisplay">25:00</div>
+          <div class="pomo-controls">
+            <button class="btn-icon" id="pomoStart">▶</button>
+            <button class="btn-icon" id="pomoPause">⏸</button>
+            <button class="btn-icon" id="pomoReset">↺</button>
+          </div>
+          <div class="pomo-sessions t-caption">
+            SESSION <span id="pomoSession">1</span>/4
+          </div>
+        </div>
+
+        <!-- Habit Tracker -->
+        <div class="habits" id="habitsWidget">
+          <div class="habits-header">
+            <span class="t-caption">DAILY HABITS</span>
+            <button class="btn-ghost btn-xs" id="addHabitBtn">+</button>
+          </div>
+          <div class="habits-list" id="habitsList">
+            <!-- Populated by productivity.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Todo List -->
+      <section class="widget widget-todo" id="todoWidget">
+        <div class="widget-header">
+          <span class="t-label">// TODO</span>
+          <span class="todo-count t-caption" id="todoCount">0 TASKS</span>
+        </div>
+        <div class="todo-input-row">
+          <input
+            type="text"
+            id="todoInput"
+            class="todo-input"
+            placeholder="Add task..."
+            maxlength="100"
+          />
+          <button class="btn-red btn-sm" id="todoAddBtn">+</button>
+        </div>
+        <ul class="todo-list" id="todoList"></ul>
+        <div class="todo-footer">
+          <span class="t-caption" id="todoRemaining">0 remaining</span>
+          <button class="btn-ghost btn-xs" id="todoClearBtn">CLEAR DONE</button>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="widget widget-notes" id="notesWidget">
+        <div class="widget-header">
+          <span class="t-label">// SCRATCHPAD</span>
+          <button class="btn-ghost btn-xs" id="notesSaveBtn">SAVE</button>
+        </div>
+        <textarea
+          id="notesArea"
+          class="notes-area"
+          placeholder="Type anything. It persists."
+          spellcheck="false"
+        ></textarea>
+      </section>
+
+    </aside>
+
+  </main>
+
+  <!-- ══ BOTTOM BAR ══ -->
+  <footer class="bottom-bar">
+
+    <!-- Calendar strip -->
+    <div class="calendar-strip" id="calendarStrip">
+      <!-- Populated by clock.js -->
+    </div>
+
+    <!-- Bookmarks bar -->
+    <div class="bookmarks-bar" id="bookmarksBar">
+      <span class="t-label bm-label">SITES //</span>
+      <div class="bm-list" id="bmList">
+        <!-- Populated by bookmarks.js -->
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- ══ COMMAND PALETTE (Ctrl+K) ══ -->
+  <div class="command-overlay" id="commandOverlay" hidden>
+    <div class="command-modal">
+      <div class="command-header">
+        <span class="t-label">// COMMAND</span>
+        <kbd class="kbd">ESC</kbd>
+      </div>
+      <input
+        type="text"
+        id="commandInput"
+        class="command-input"
+        placeholder="Type a command..."
+        autocomplete="off"
+      />
+      <ul class="command-results" id="commandResults"></ul>
+    </div>
+  </div>
+
+  <!-- ══ TOAST CONTAINER ══ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ══ KEYBOARD SHORTCUT HINT ══ -->
+  <div class="kbd-hints" id="kbdHints">
+    <span><kbd>Ctrl+K</kbd> Command</span>
+    <span><kbd>Ctrl+/</kbd> Shortcuts</span>
+    <span><kbd>Ctrl+N</kbd> Notes</span>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>

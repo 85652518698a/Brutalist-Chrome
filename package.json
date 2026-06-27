@@ -1,0 +1,23 @@
+{
+  "name": "brutalist-chrome",
+  "version": "1.0.0",
+  "description": "Premium brutalist Chrome extension — Function Over Form.",
+  "private": true,
+  "scripts": {
+    "build":   "node scripts/build.js",
+    "zip":     "node scripts/zip.js",
+    "release": "node scripts/release.js",
+    "lint":    "echo 'No linter configured yet'",
+    "clean":   "rm -rf dist/*.zip"
+  },
+  "devDependencies": {
+    "archiver": "^6.0.1"
+  },
+  "engines": { "node": ">=18" },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url":  "https://github.com/85652518698a/Brutalist-Chrome.git"
+  },
+  "keywords": ["chrome-extension", "brutalism", "newtab", "productivity", "dark-theme"]
+}

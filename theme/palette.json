@@ -1,0 +1,38 @@
+{
+  "name": "Brutalist Chrome",
+  "description": "Raw concrete palette extracted from brutalist architecture photography",
+  "version": "1.0.0",
+  "colors": {
+    "void":        "#0D0D0D",
+    "obsidian":    "#121212",
+    "concrete":    "#1A1A1A",
+    "graphite":    "#2A2A2A",
+    "ash":         "#3D3D3D",
+    "smoke":       "#6B6B6B",
+    "fog":         "#9A9A9A",
+    "bone":        "#C8C4BC",
+    "chalk":       "#E8E4DC",
+    "white":       "#F2EFE8",
+    "pure":        "#FFFFFF",
+    "red":         "#DC2626",
+    "red_dim":     "#991B1B",
+    "red_bright":  "#EF4444",
+    "red_glow":    "rgba(220,38,38,0.15)"
+  },
+  "chrome_theme": {
+    "frame":              "#0D0D0D",
+    "frame_inactive":     "#121212",
+    "toolbar":            "#1A1A1A",
+    "tab_background":     "#0D0D0D",
+    "tab_selected":       "#1A1A1A",
+    "tab_text":           "#9A9A9A",
+    "tab_text_selected":  "#F2EFE8",
+    "omnibox_bg":         "#2A2A2A",
+    "omnibox_text":       "#F2EFE8",
+    "bookmark_text":      "#9A9A9A",
+    "ntp_background":     "#0D0D0D",
+    "ntp_text":           "#F2EFE8",
+    "ntp_link":           "#DC2626",
+    "button_background":  "#2A2A2A"
+  }
+}

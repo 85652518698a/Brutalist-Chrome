@@ -1,0 +1,84 @@
+/* ============================================================
+   BRUTALIST CHROME — TYPOGRAPHY
+   ============================================================ */
+
+@import url('variables.css');
+
+/* ── DISPLAY ── */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  font-size: var(--scale-5xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.t-headline {
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  font-size: var(--scale-3xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.t-title {
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  font-size: var(--scale-xl);
+  line-height: var(--leading-snug);
+  color: var(--text);
+}
+
+/* ── BODY ── */
+.t-body {
+  font-family: var(--font-body);
+  font-weight: var(--weight-normal);
+  font-size: var(--scale-base);
+  line-height: var(--leading-normal);
+  color: var(--text);
+}
+
+.t-caption {
+  font-family: var(--font-mono);
+  font-weight: var(--weight-normal);
+  font-size: var(--scale-sm);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.t-label {
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  font-size: var(--scale-sm);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── MONO / CODE ── */
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: var(--scale-base);
+  color: var(--text);
+}
+
+/* ── ACCENT ── */
+.t-accent { color: var(--accent); }
+.t-muted  { color: var(--text-muted); }
+.t-dim    { color: var(--text-dim); }
+
+/* ── DECORATIVE ── */
+.t-slash::before {
+  content: '// ';
+  color: var(--red);
+  font-family: var(--font-mono);
+}
+
+.t-bracket::before { content: '['; color: var(--red); }
+.t-bracket::after  { content: ']'; color: var(--red); }

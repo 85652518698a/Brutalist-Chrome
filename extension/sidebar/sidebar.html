@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BRUTALIST — Sidebar</title>
+  <link rel="stylesheet" href="../../theme/variables.css" />
+  <link rel="stylesheet" href="sidebar.css" />
+</head>
+<body>
+  <header class="sb-header">
+    <span class="sb-brand"><span style="color:var(--red)">B</span>RUTALIST</span>
+    <button class="sb-close" id="sbClose">✕</button>
+  </header>
+
+  <nav class="sb-tabs">
+    <button class="sb-tab active" data-tab="todo">TODO</button>
+    <button class="sb-tab" data-tab="notes">NOTES</button>
+    <button class="sb-tab" data-tab="history">HISTORY</button>
+  </nav>
+
+  <!-- TODO Tab -->
+  <div class="sb-panel active" id="tab-todo">
+    <div class="sb-add-row">
+      <input type="text" id="sbTodoInput" class="sb-input" placeholder="Add task..." />
+      <button class="sb-btn-red" id="sbTodoAdd">+</button>
+    </div>
+    <ul class="sb-todo-list" id="sbTodoList"></ul>
+  </div>
+
+  <!-- NOTES Tab -->
+  <div class="sb-panel" id="tab-notes">
+    <textarea id="sbNotes" class="sb-notes" placeholder="Quick notes..."></textarea>
+    <button class="sb-btn-ghost" id="sbNotesSave">SAVE NOTES</button>
+  </div>
+
+  <!-- HISTORY Tab -->
+  <div class="sb-panel" id="tab-history">
+    <div class="sb-history-list" id="sbHistory">
+      <div class="sb-empty">Loading history...</div>
+    </div>
+  </div>
+
+  <script src="sidebar.js"></script>
+</body>
+</html>

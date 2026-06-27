@@ -1,0 +1,44 @@
+/* BRUTALIST CHROME — Sidebar */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0 !important; }
+body { background: var(--obsidian); color: var(--text); font-family: var(--font-body); height: 100vh; display: flex; flex-direction: column; }
+
+.sb-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 2px solid var(--red); background: var(--void); flex-shrink: 0; }
+.sb-brand { font-family: Arial Black, sans-serif; font-size: 1rem; font-weight: 900; color: var(--white); letter-spacing: -0.02em; }
+.sb-close { background: none; border: none; color: var(--fog); font-size: 14px; cursor: pointer; padding: 4px; }
+.sb-close:hover { color: var(--red); }
+
+.sb-tabs { display: flex; border-bottom: 1px solid var(--graphite); flex-shrink: 0; }
+.sb-tab { flex: 1; background: transparent; border: none; border-bottom: 2px solid transparent; color: var(--fog); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; padding: 10px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; }
+.sb-tab.active { color: var(--red); border-bottom-color: var(--red); }
+.sb-tab:hover:not(.active) { color: var(--chalk); }
+
+.sb-panel { display: none; flex: 1; flex-direction: column; padding: 12px; gap: 8px; overflow-y: auto; }
+.sb-panel.active { display: flex; }
+
+.sb-add-row { display: flex; gap: 6px; }
+.sb-input { flex: 1; background: var(--graphite); border: 1px solid var(--ash); color: var(--white); font-family: var(--font-body); font-size: 12px; padding: 8px; outline: none; }
+.sb-input:focus { border-color: var(--red); }
+.sb-input::placeholder { color: var(--smoke); }
+.sb-btn-red { background: var(--red); border: none; color: #fff; font-family: var(--font-mono); font-weight: 700; font-size: 16px; padding: 0 12px; cursor: pointer; }
+.sb-btn-red:hover { background: var(--red-bright); }
+.sb-btn-ghost { background: transparent; border: 1px solid var(--graphite); color: var(--fog); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; padding: 8px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; }
+.sb-btn-ghost:hover { border-color: var(--red); color: var(--red); }
+
+.sb-todo-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.sb-todo-item { display: flex; align-items: center; gap: 8px; padding: 8px; border: 1px solid var(--graphite); font-size: 12px; color: var(--chalk); cursor: pointer; }
+.sb-todo-item:hover { background: var(--graphite); }
+.sb-todo-item.done { color: var(--smoke); text-decoration: line-through; }
+.sb-todo-cb { width: 10px; height: 10px; border: 1px solid var(--fog); flex-shrink: 0; }
+.sb-todo-item.done .sb-todo-cb { background: var(--red); border-color: var(--red); }
+
+.sb-notes { width: 100%; flex: 1; background: var(--graphite); border: 1px solid var(--ash); color: var(--chalk); font-family: var(--font-mono); font-size: 12px; line-height: 1.6; padding: 10px; resize: none; outline: none; min-height: 200px; }
+.sb-notes:focus { border-color: var(--red); }
+.sb-notes::placeholder { color: var(--smoke); }
+
+.sb-history-list { display: flex; flex-direction: column; gap: 4px; }
+.sb-history-item { padding: 8px; border: 1px solid var(--graphite); font-size: 11px; cursor: pointer; }
+.sb-history-item:hover { background: var(--graphite); border-color: var(--ash); }
+.sb-history-title { color: var(--chalk); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+.sb-history-url { font-family: var(--font-mono); font-size: 9px; color: var(--smoke); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sb-empty { font-family: var(--font-mono); font-size: 11px; color: var(--smoke); padding: 16px; text-align: center; letter-spacing: 0.1em; }

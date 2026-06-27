@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRUTALIST</title>
+  <link rel="stylesheet" href="../../theme/variables.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+
+  <header class="popup-header">
+    <div class="popup-logo">
+      <span class="logo-b">B</span>
+      <span class="logo-text">RUTALIST</span>
+    </div>
+    <span class="popup-version">v1.0.0</span>
+  </header>
+
+  <div class="popup-body">
+
+    <!-- Quick Stats -->
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-val" id="statTodos">0</span>
+        <span class="stat-label">TASKS</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val" id="statHabits">0/0</span>
+        <span class="stat-label">HABITS</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val" id="statPts">0</span>
+        <span class="stat-label">PTS</span>
+      </div>
+    </div>
+
+    <!-- Quick Add Todo -->
+    <div class="quick-add">
+      <input type="text" id="quickTodo" class="quick-input" placeholder="Quick add task..." maxlength="80" />
+      <button id="quickAddBtn" class="btn-red-sm">+</button>
+    </div>
+
+    <!-- Actions -->
+    <nav class="popup-nav">
+      <a class="nav-item" id="openNewTab" href="#">
+        <span class="nav-icon">⊞</span>NEW TAB
+      </a>
+      <a class="nav-item" id="openOptions" href="#">
+        <span class="nav-icon">⚙</span>SETTINGS
+      </a>
+      <a class="nav-item" id="openSidebar" href="#">
+        <span class="nav-icon">☰</span>SIDEBAR
+      </a>
+    </nav>
+
+    <!-- Search Engine Picker -->
+    <div class="engine-section">
+      <span class="section-label">// DEFAULT ENGINE</span>
+      <div class="engine-row" id="engineRow">
+        <button class="eng-btn active" data-engine="google">GOOGLE</button>
+        <button class="eng-btn" data-engine="bing">BING</button>
+        <button class="eng-btn" data-engine="duckduckgo">DDG</button>
+        <button class="eng-btn" data-engine="brave">BRAVE</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="popup-footer">
+    <span>NO SIMPLICITY. NO EXCUSES. JUST FUNCTION.</span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

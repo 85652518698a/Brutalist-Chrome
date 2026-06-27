@@ -1,0 +1,114 @@
+{
+  "manifest_version": 3,
+  "name": "Brutalist Chrome — Function Over Form",
+  "short_name": "Brutalist",
+  "version": "1.0.0",
+  "description": "A premium brutalist Chrome customization. Raw, functional, uncompromising. Features animated New Tab with productivity dashboard, live clock, weather, todos, notes, and more.",
+
+  "author": "Brutalist Chrome Project",
+  "homepage_url": "https://github.com/your-username/brutalist-chrome",
+
+  "icons": {
+    "16":  "assets/icons/icon16.png",
+    "32":  "assets/icons/icon32.png",
+    "48":  "assets/icons/icon48.png",
+    "64":  "assets/icons/icon64.png",
+    "128": "assets/icons/icon128.png"
+  },
+
+  "chrome_url_overrides": {
+    "newtab": "newtab/index.html"
+  },
+
+  "action": {
+    "default_popup": "extension/popup/popup.html",
+    "default_icon": {
+      "16":  "assets/icons/icon16.png",
+      "32":  "assets/icons/icon32.png",
+      "48":  "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    },
+    "default_title": "Brutalist Chrome Settings"
+  },
+
+  "background": {
+    "service_worker": "extension/background.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["extension/content.js"],
+      "run_at": "document_end",
+      "exclude_matches": ["chrome://*/*", "chrome-extension://*/*"]
+    }
+  ],
+
+  "options_ui": {
+    "page": "extension/options/options.html",
+    "open_in_tab": true
+  },
+
+  "side_panel": {
+    "default_path": "extension/sidebar/sidebar.html"
+  },
+
+  "permissions": [
+    "storage",
+    "bookmarks",
+    "history",
+    "tabs",
+    "topSites",
+    "contextMenus",
+    "notifications",
+    "sidePanel",
+    "alarms"
+  ],
+
+  "host_permissions": [
+    "https://api.open-meteo.com/*",
+    "https://wttr.in/*",
+    "https://api.quotable.io/*"
+  ],
+
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "Command+Shift+B"
+      },
+      "description": "Open Brutalist popup"
+    },
+    "open-sidebar": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Toggle Brutalist sidebar"
+    },
+    "new-tab": {
+      "suggested_key": {
+        "default": "Ctrl+T"
+      },
+      "description": "Open new Brutalist tab"
+    }
+  },
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' data: https:;"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/wallpapers/*",
+        "assets/icons/*",
+        "assets/fonts/*",
+        "theme/*",
+        "newtab/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

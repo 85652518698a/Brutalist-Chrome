@@ -1,0 +1,154 @@
+/* ============================================================
+   BRUTALIST CHROME — ANIMATIONS
+   ============================================================ */
+
+@import url('variables.css');
+
+/* ── KEYFRAMES ── */
+
+@keyframes brutalist-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes brutalist-slide-left {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes brutalist-slide-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes glitch {
+  0%   { clip-path: inset(40% 0 61% 0); transform: translate(-2px, 0); }
+  20%  { clip-path: inset(92% 0 1%  0); transform: translate(2px,  0); }
+  40%  { clip-path: inset(43% 0 1%  0); transform: translate(0,    0); }
+  60%  { clip-path: inset(25% 0 58% 0); transform: translate(2px,  0); }
+  80%  { clip-path: inset(54% 0 7%  0); transform: translate(-2px, 0); }
+  100% { clip-path: inset(58% 0 43% 0); transform: translate(0,    0); }
+}
+
+@keyframes scan-line {
+  0%   { top: -10%; }
+  100% { top: 110%; }
+}
+
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes noise {
+  0%   { background-position: 0 0; }
+  10%  { background-position: -5% -10%; }
+  20%  { background-position: -15% 5%; }
+  30%  { background-position: 7% -25%; }
+  40%  { background-position: 20% 25%; }
+  50%  { background-position: -25% 10%; }
+  60%  { background-position: 15% 5%; }
+  70%  { background-position: 0 15%; }
+  80%  { background-position: 25% 35%; }
+  90%  { background-position: -10% 10%; }
+  100% { background-position: 0 0; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes border-flicker {
+  0%, 100% { border-color: var(--graphite); }
+  50%       { border-color: var(--red); }
+}
+
+/* ── UTILITY CLASSES ── */
+
+.animate-enter {
+  animation: brutalist-enter var(--dur-base) var(--ease-brutal) both;
+}
+
+.animate-slide-left {
+  animation: brutalist-slide-left var(--dur-base) var(--ease-brutal) both;
+}
+
+.animate-slide-right {
+  animation: brutalist-slide-right var(--dur-base) var(--ease-brutal) both;
+}
+
+.animate-pulse-red {
+  animation: pulse-red 2s ease-in-out infinite;
+}
+
+.animate-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* ── STAGGER DELAYS ── */
+.delay-1 { animation-delay: 50ms; }
+.delay-2 { animation-delay: 100ms; }
+.delay-3 { animation-delay: 150ms; }
+.delay-4 { animation-delay: 200ms; }
+.delay-5 { animation-delay: 250ms; }
+.delay-6 { animation-delay: 300ms; }
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── GLITCH EFFECT ── */
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--white);
+}
+.glitch::before {
+  color: var(--red);
+  animation: glitch 650ms infinite;
+}
+.glitch::after {
+  color: var(--bone);
+  animation: glitch 650ms infinite reverse;
+  animation-delay: 100ms;
+}
+
+/* ── SCAN LINE OVERLAY ── */
+.scan-lines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BRUTALIST CHROME — Settings</title>
+  <link rel="stylesheet" href="../../theme/variables.css" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="page">
+
+    <header class="page-header">
+      <div class="header-inner">
+        <div class="brand">
+          <span class="brand-accent">B</span>RUTALIST CHROME
+        </div>
+        <div class="header-sub t-caption">SETTINGS // CUSTOMIZATION</div>
+      </div>
+    </header>
+
+    <main class="page-body">
+      <div class="settings-grid">
+
+        <!-- Appearance -->
+        <section class="settings-section">
+          <h2 class="section-title">// APPEARANCE</h2>
+
+          <div class="setting-row">
+            <label class="setting-label">BACKGROUND OPACITY</label>
+            <input type="range" id="bgOpacity" min="0" max="100" value="18" class="slider" />
+            <span class="setting-val" id="bgOpacityVal">18%</span>
+          </div>
+
+          <div class="setting-row">
+            <label class="setting-label">SHOW TICKER TAPE</label>
+            <div class="toggle" id="toggleTicker" data-key="showTicker" data-default="true">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <label class="setting-label">ENABLE PARALLAX</label>
+            <div class="toggle on" id="toggleParallax" data-key="parallax" data-default="true">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <label class="setting-label">SHOW SCAN LINES</label>
+            <div class="toggle on" id="toggleScanLines" data-key="scanLines" data-default="true">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Widgets -->
+        <section class="settings-section">
+          <h2 class="section-title">// WIDGETS</h2>
+
+          <div class="setting-row">
+            <label class="setting-label">SHOW WEATHER</label>
+            <div class="toggle on" data-key="showWeather" data-default="true">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <label class="setting-label">SHOW CLOCK</label>
+            <div class="toggle on" data-key="showClock" data-default="true">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <label class="setting-label">SHOW QUOTES</label>
+            <div class="toggle on" data-key="showQuotes" data-default="true">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <label class="setting-label">SHOW PRODUCTIVITY</label>
+            <div class="toggle on" data-key="showProductivity" data-default="true">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pomodoro -->
+        <section class="settings-section">
+          <h2 class="section-title">// POMODORO</h2>
+
+          <div class="setting-row">
+            <label class="setting-label">WORK DURATION (MIN)</label>
+            <input type="number" id="pomoWork" class="num-input" value="25" min="1" max="90" />
+          </div>
+
+          <div class="setting-row">
+            <label class="setting-label">SHORT BREAK (MIN)</label>
+            <input type="number" id="pomoShort" class="num-input" value="5" min="1" max="30" />
+          </div>
+
+          <div class="setting-row">
+            <label class="setting-label">LONG BREAK (MIN)</label>
+            <input type="number" id="pomoLong" class="num-input" value="15" min="5" max="60" />
+          </div>
+
+          <div class="setting-row">
+            <label class="setting-label">NOTIFICATIONS</label>
+            <div class="toggle on" data-key="pomoNotify" data-default="true">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Search -->
+        <section class="settings-section">
+          <h2 class="section-title">// SEARCH</h2>
+
+          <div class="setting-row">
+            <label class="setting-label">DEFAULT ENGINE</label>
+            <select id="searchEngine" class="select-input">
+              <option value="google">GOOGLE</option>
+              <option value="bing">BING</option>
+              <option value="duckduckgo">DUCKDUCKGO</option>
+              <option value="brave">BRAVE</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Data -->
+        <section class="settings-section">
+          <h2 class="section-title">// DATA</h2>
+
+          <div class="setting-row">
+            <label class="setting-label">EXPORT DATA</label>
+            <button class="btn-ghost-sm" id="exportBtn">EXPORT JSON</button>
+          </div>
+
+          <div class="setting-row">
+            <label class="setting-label">RESET ALL DATA</label>
+            <button class="btn-danger-sm" id="resetBtn">RESET</button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <button class="btn-save" id="saveBtn">SAVE SETTINGS</button>
+      <span class="save-status" id="saveStatus"></span>
+    </footer>
+
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
