@@ -1,31 +1,29 @@
 /**
  * BRUTALIST CHROME — Weather Module
- * Fetches weather from Open-Meteo (free, no API key).
+ * Uses IP-based location — no geolocation permission needed.
  */
 
 const WMO_CODES = {
-  0:  { desc: 'CLEAR SKY',          icon: '◉' },
-  1:  { desc: 'MAINLY CLEAR',       icon: '◉' },
-  2:  { desc: 'PARTLY CLOUDY',      icon: '◎' },
-  3:  { desc: 'OVERCAST',           icon: '◌' },
-  45: { desc: 'FOGGY',              icon: '≋' },
-  48: { desc: 'RIME FOG',           icon: '≋' },
-  51: { desc: 'LIGHT DRIZZLE',      icon: '∷' },
-  61: { desc: 'RAIN',               icon: '∷' },
-  63: { desc: 'MODERATE RAIN',      icon: '∷∷' },
-  71: { desc: 'SNOW',               icon: '❄' },
-  80: { desc: 'RAIN SHOWERS',       icon: '∷' },
-  95: { desc: 'THUNDERSTORM',       icon: '⚡' },
-  99: { desc: 'HAIL STORM',         icon: '⚡∷' },
+  0:  { desc: 'CLEAR SKY',       icon: '◉' },
+  1:  { desc: 'MAINLY CLEAR',    icon: '◉' },
+  2:  { desc: 'PARTLY CLOUDY',   icon: '◎' },
+  3:  { desc: 'OVERCAST',        icon: '◌' },
+  45: { desc: 'FOGGY',           icon: '≋' },
+  48: { desc: 'RIME FOG',        icon: '≋' },
+  51: { desc: 'LIGHT DRIZZLE',   icon: '∷' },
+  61: { desc: 'RAIN',            icon: '∷' },
+  63: { desc: 'MODERATE RAIN',   icon: '∷∷' },
+  71: { desc: 'SNOW',            icon: '❄' },
+  80: { desc: 'RAIN SHOWERS',    icon: '∷' },
+  95: { desc: 'THUNDERSTORM',    icon: '⚡' },
+  99: { desc: 'HAIL STORM',      icon: '⚡∷' },
 };
 
 export const Weather = {
   async init() {
-    // Load cached first
-    const cache = await this._loadCache();
+    const cache    = await this._loadCache();
     if (cache) this._render(cache);
 
-    // Fetch fresh if cache is old (>30 min)
     const cacheAge = Date.now() - (cache?.timestamp || 0);
     if (cacheAge > 30 * 60 * 1000) {
       await this._fetchAndRender();
@@ -34,8 +32,12 @@ export const Weather = {
 
   async _fetchAndRender() {
     try {
-      const pos = await this._getPosition();
-      const { latitude: lat, longitude: lon } = pos.coords;
+      // IP-based location — no browser permission needed
+      const ipRes  = await fetch('https://ipapi.co/json/');
+      const ipData = await ipRes.json();
+      const lat    = ipData.latitude;
+      const lon    = ipData.longitude;
+      const city   = (ipData.city || 'UNKNOWN').toUpperCase();
 
       const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
         `&current=temperature_2m,weathercode,relativehumidity_2m` +
@@ -50,13 +52,9 @@ export const Weather = {
         humidity:  data.current.relativehumidity_2m,
         high:      Math.round(data.daily.temperature_2m_max[0]),
         low:       Math.round(data.daily.temperature_2m_min[0]),
-        lat, lon,
+        city,
         timestamp: Date.now(),
       };
-
-      // Reverse geocode city name
-      const geoRes  = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m&timezone=auto`);
-      weatherData.city = `${lat.toFixed(1)}°N ${lon.toFixed(1)}°E`;
 
       this._render(weatherData);
       chrome.storage?.local.set({ weatherCache: weatherData });
@@ -69,15 +67,14 @@ export const Weather = {
 
   _render(data) {
     const meta = WMO_CODES[data.code] || { desc: 'UNKNOWN', icon: '◈' };
-
-    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    const set  = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
     set('weatherTemp', `${data.temp}°`);
     set('weatherIcon', meta.icon);
     set('weatherDesc', meta.desc);
     set('weatherHigh', data.high);
     set('weatherLow',  data.low);
     set('weatherHum',  data.humidity);
-    set('weatherLoc',  data.city || 'LOCATING...');
+    set('weatherLoc',  data.city || '---');
   },
 
   async _loadCache() {
@@ -85,12 +82,4 @@ export const Weather = {
       chrome.storage?.local.get('weatherCache', r => resolve(r.weatherCache || null));
     });
   },
-
-  _getPosition() {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject, {
-        timeout: 5000, maximumAge: 1800000
-      });
-    });
-  }
 };
